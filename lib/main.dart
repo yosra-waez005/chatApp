@@ -8,10 +8,10 @@ import 'screens/Home_page.dart';
 import 'screens/SingUp_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  WidgetsFlutterBinding.ensureInitialized();//هدول الاسطر التلاته دوما بكتبن اول ما اربطو بالفايربيز مع المكاتب يلي فوق
+  await Firebase.initializeApp(//
+    options: DefaultFirebaseOptions.currentPlatform,//
+  );//
   runApp(chatApp());
 }
 class chatApp extends StatelessWidget {
@@ -26,7 +26,7 @@ class chatApp extends StatelessWidget {
         signUp.id: (context)=> signUp(),
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: 'homePage',
+      initialRoute: 'homePage',//مع الروت مابصير استخدم الهوم
 
     );
   }

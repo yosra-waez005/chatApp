@@ -9,12 +9,12 @@ class chatBubble extends StatelessWidget {
     required this.message,
     super.key,
   });
-  Message message;
+  classMessage message;
   @override
   Widget build(BuildContext context) {
-    return Align(alignment: Alignment.centerLeft,
+    return Align(alignment: Alignment.centerLeft,//لانو الليست فيو خلت الرساله تاخد العرض كلو بس هيك بتاخد عرض الرساله
       child: Container(
-
+//شلت الطول والعلرض مشان هوه يحدد حسب الرساله
         padding: EdgeInsets.only(left: 16,top: 16,bottom: 16,right: 16),
        margin: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
         decoration: const BoxDecoration(
@@ -25,7 +25,7 @@ class chatBubble extends StatelessWidget {
                 bottomRight: Radius.circular(20))),
 
         child: Text(
-          message.message,
+          message.consMessag,
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -34,7 +34,7 @@ class chatBubble extends StatelessWidget {
 }
 class chatBubbleForFriend extends StatelessWidget {
    chatBubbleForFriend({super.key, required this.message});
-Message message;
+classMessage message;
   @override
   Widget build(BuildContext context) {
     return Align(alignment: Alignment.centerRight,
@@ -50,7 +50,7 @@ Message message;
                 bottomLeft: Radius.circular(20))),
 
         child: Text(
-          message.message,
+          message.consMessag,
           style: TextStyle(color: Colors.white),
         ),
       ),

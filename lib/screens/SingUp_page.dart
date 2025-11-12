@@ -71,12 +71,14 @@ String? email,password;
                 textField(onchanged: (p0) {
 email=p0;
                 },
-                  Hint: "Enter your Email",),
+                  Hint: "Enter your Email",
+                LabelText: "Email",),
                 SizedBox(height: 7,),
                 textField(onchanged: (p0) {
 password=p0;
                 },
                   Hint: "Enter your Password",
+                  LabelText: 'Password',
                   obscure: true,
               ),
 
@@ -89,7 +91,7 @@ password=p0;
                     try {
                       UserCredential user = await FirebaseAuth.instance
                           .signInWithEmailAndPassword(
-                          email: email!, password: password!);
+                          email: email!, password: password!);    ShawSnackBar(context, 'success');
                     Navigator.pushNamed(context, chatpage.id,arguments: email);
                     } on FirebaseAuthException catch (ex) {
                       if (ex.code == 'user-not-found') {

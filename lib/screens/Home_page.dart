@@ -30,13 +30,13 @@ class _homePageState extends State<homePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
+    return ModalProgressHUD(// مشان اللودينغ وبدي احطا فوق الشي لهيك غلفتا فوق
       inAsyncCall: isLoading,
       child: Scaffold(
         backgroundColor: kPrimaryColor,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Form(
+          child: Form(// لانو لاعمل فاليديت للايميل والباسوورد لازم احط فورم واخد الكي تبعا
             key: formkey,
             child: ListView(
               children: [
@@ -77,9 +77,10 @@ class _homePageState extends State<homePage> {
                 ),
                 textField(
                   onchanged: (p0) {
-                    email = p0;
+                    email = p0; // مشان اجيب الايميل
                   },
                   Hint: "Enter your Email",
+                  LabelText: "Email",
                 ),
                 SizedBox(
                   height: 7,
@@ -89,7 +90,8 @@ class _homePageState extends State<homePage> {
                     password = p0;
                   },
                   Hint: "Enter your Password",
-obscure: true,
+                  LabelText: 'Password',
+                  obscure: true,
                 ),
                 SizedBox(
                   height: 20,
@@ -97,27 +99,30 @@ obscure: true,
                 textButton(
                   text: "Log In",
                   onTap: () async {
-                    if (formkey.currentState!.validate()) {
+                    if (formkey.currentState!.validate()) {//هون استخدمت الكي تبع الفورم مشان الفاليديت وعبقلو تاكدلي من الفاليديت وبحط الشروط بالتيكست فيلد
                       setState(() {
                         isLoading = true;
                       });
                       try {
-                        UserCredential user = await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: email!, password: password!);
-             Navigator.pushNamed(context, chatpage.id,arguments: email);
-                      } on FirebaseAuthException catch (ex) {
+                        UserCredential user = await FirebaseAuth
+                            .instance //هون بلشت احفظ الايميل بالفاير بيز
+                            .createUserWithEmailAndPassword( //و
+                            email: email!,
+                            password: password!); //بلشت استخدم الاوث
+                        ShawSnackBar(context, 'success');
+                        Navigator.pushNamed(context, chatpage.id,
+                            arguments: email);
+                      } on FirebaseAuthException catch (ex) { //مشان الاكسبشن تبع الافايربيز
                         if (ex.code == 'weak-password') {
                           ShawSnackBar(context, 'weak-password');
                         } else if (ex.code == 'email-already-in-use') {
                           ShawSnackBar(context, 'email-already-in-use');
                         };
-                      };
-
-                      setState(() {
-                        isLoading = false;
-                      });
-
+                      }
+                    catch(e){ ShawSnackBar(context, 'there was an error');};//اي اكسبشن غير تبعات الفاير بيز
+                    setState(() {
+                    isLoading = false;
+                    });
                     } else {}
                   },
                 ),
@@ -147,6 +152,4 @@ obscure: true,
       ),
     );
   }
-
-
 }
